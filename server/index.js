@@ -4,19 +4,16 @@ const fetch = require("node-fetch");
 const cors = require("cors");
 
 dotenv.config();
-
+const API_KEY = process.env.STEAM_API_KEY;
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 
-app.get("/api/hello", (req, res) => {
-  res.json({ message: "Hello from the backend!" });
-});
+console.log(API_KEY);
 
 app.get("/api/owned-games", async (req, res) => {
   const { steamid } = req.query;
-  const API_KEY = "C8456A36ED04D1018B3911E341E5C953";
 
   if (!steamid) {
     return res.status(400).json({ error: "Missing steamid" });
@@ -28,17 +25,17 @@ app.get("/api/owned-games", async (req, res) => {
 `
     );
     const data = await response.json();
+    if (data) {
+      const games = data.response.games.map((game) => ({
+        name: game.name,
+        appid: game.appid,
+        icon_url: `https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/${game.appid}/${game.img_icon_url}.jpg`,
+        banner_url: `https://cdn.akamai.steamstatic.com/steam/apps/${game.appid}/header.jpg`,
+        playtime: game.playtime_forever,
+      }));
 
-    // Extract game information including banners
-    const games = data.response.games.map((game) => ({
-      name: game.name,
-      appid: game.appid,
-      icon_url: `https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/${game.appid}/${game.img_icon_url}.jpg`,
-      banner_url: `https://cdn.akamai.steamstatic.com/steam/apps/${game.appid}/header.jpg`,
-      playtime: game.playtime_forever,
-    }));
-
-    res.json(games); // Send back games with icons and banners
+      res.json(games);
+    }
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Failed to fetch data" });
@@ -47,7 +44,6 @@ app.get("/api/owned-games", async (req, res) => {
 
 app.get("/api/get-user-id", async (req, res) => {
   const { steamuser } = req.query;
-  const API_KEY = "C8456A36ED04D1018B3911E341E5C953";
 
   if (!steamuser) {
     return res.status(400).json({ error: "Missing steamuser parameter" });
@@ -82,7 +78,6 @@ app.listen(PORT, () => {
 
 app.get("/api/get-user-info", async (req, res) => {
   const { steamid } = req.query;
-  const API_KEY = "C8456A36ED04D1018B3911E341E5C953";
 
   if (!steamid) {
     return res.status(400).json({ error: "Missing steamid" });
@@ -102,7 +97,6 @@ app.get("/api/get-user-info", async (req, res) => {
 
 app.get("/api/get-user-stats-for-game", async (req, res) => {
   const { steamid, gameid } = req.query;
-  const API_KEY = "C8456A36ED04D1018B3911E341E5C953";
 
   if (!steamid) {
     return res.status(400).json({ error: "Missing steamid" });
@@ -144,7 +138,6 @@ app.get("/api/get-game-genres", async (req, res) => {
 
 app.get("/api/get-recently-played", async (req, res) => {
   const { steamid } = req.query;
-  const API_KEY = "C8456A36ED04D1018B3911E341E5C953";
 
   if (!steamid) {
     return res.status(400).json({ error: "Missing steamid" });
@@ -164,7 +157,6 @@ app.get("/api/get-recently-played", async (req, res) => {
 
 app.get("/api/get-acheivement-details", async (req, res) => {
   const { appid } = req.query;
-  const API_KEY = "C8456A36ED04D1018B3911E341E5C953";
 
   if (!appid) {
     return res.status(400).json({ error: "Missing app id" });
