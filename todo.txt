@@ -1,6 +1,0 @@
-To Do:
-
-Logo
-Input field focus border
-add another section to the home page
- 
