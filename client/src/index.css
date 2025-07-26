@@ -12,6 +12,10 @@
   --container-xl-max: 1280px;
 }
 
+:root {
+  overflow-x: hidden;
+}
+
 .container {
   @apply container mx-auto;
   max-width: var(--container-xl-max);
