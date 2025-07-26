@@ -23,7 +23,7 @@ const index = () => {
   return (
     <>
       <div
-        className={`bg-[#0082FB] fixed  top-0 z-50 w-lvw transition-transform duration-300 ${
+        className={`bg-[#0082FB] fixed  top-0 z-50 w-screen transition-transform duration-300 ${
           showNavbar ? "translate-y-0" : "-translate-y-full"
         }`}
       >
