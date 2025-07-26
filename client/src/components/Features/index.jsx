@@ -2,24 +2,25 @@ import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import gettingSteamID from "../../assets/STEAM_ID.gif";
 import placeholderIcon from "../../assets/placeholder.svg";
+import { CopyIcon, LogInIcon, SearchIcon, UserIcon } from "../StepIcons";
 const ID_STEPS = [
   {
-    icon: placeholderIcon,
+    icon: <LogInIcon size={24} color="#0082FB" />,
     heading: "Log in to Steam",
     text: "Visit steampowered.com and sign in to your account.",
   },
   {
-    icon: placeholderIcon,
+    icon: <UserIcon size={24} color="#0082FB" />,
     heading: "Click Your Account",
     text: "In the top-right corner, click your username to view your account details.",
   },
   {
-    icon: placeholderIcon,
+    icon: <CopyIcon size={24} color="#0082FB" />,
     heading: "Copy Your Steam ID",
     text: "Check the URL in your browser for a 17-digit number (e.g., 76561199848860650). Copy that number.",
   },
   {
-    icon: placeholderIcon,
+    icon: <SearchIcon size={24} color="#0082FB" />,
     heading: "Paste and Search",
     text: "Return to the search bar above, paste your Steam ID, and hit search to explore your gaming stats!",
   },
@@ -39,13 +40,13 @@ const childVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: "easeOut" }, // move it INSIDE 'visible'
+    transition: { duration: 0.6, ease: "easeOut" },
   },
 };
 
 const index = () => {
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-8">
       <motion.div
         className="container mx-auto flex flex-col md:flex-row gap-4 items-center px-2"
         initial={{ opacity: 0 }}
@@ -94,11 +95,7 @@ const index = () => {
               className="border border-[#0082FB] rounded mb-2 overflow-hidden basis-1/4 p-2 flex flex-col gap-3"
               variants={childVariants}
             >
-              <img
-                src={step.icon}
-                className="h-9 w-9 rounded-sm"
-                alt="Placeholder"
-              />
+              {step.icon}
               <h2 className="text-lg font-header font-bold italic">
                 {step.heading}
               </h2>
