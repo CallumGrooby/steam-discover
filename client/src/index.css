@@ -1,0 +1,59 @@
+@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Inter", sans-serif;
+  --font-header: "Chivo", sans-serif;
+
+  --container-small: "max-w-[1280px] mx-auto w-full";
+}
+
+@theme {
+  --container-xl-max: 1280px;
+}
+
+.container {
+  @apply container mx-auto;
+  max-width: var(--container-xl-max);
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: bold;
+}
+
+.status::before {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: currentColor; /* uses the text color */
+}
+
+.pagination-button,
+.pagination-button-next {
+  @apply font-display bg-[#EFEFEF] text-black text-center transition;
+}
+
+.pagination-ellipsis {
+  @apply font-display text-black text-center size-9 px-2 py-2 rounded-sm;
+}
+
+.pagination-button {
+  @apply size-9 px-2 py-2 rounded-sm text-sm sm:text-base;
+}
+.pagination-button-next {
+  @apply px-4 sm:px-6 py-2 rounded-sm text-sm sm:text-base;
+}
+
+.pagination-button:hover,
+.pagination-button-next:hover {
+  @apply bg-blue-400 text-white;
+}
+
+.pagination-button.selected {
+  @apply text-white bg-[#0082FB];
+}
