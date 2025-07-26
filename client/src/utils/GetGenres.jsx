@@ -1,7 +1,8 @@
 import axios from "axios";
 
 export const GetGenres = async (APP_ID) => {
-  const url = `http://localhost:5000/api/get-game-genres?gameid=${APP_ID}`;
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+  const url = `${BACKEND_URL}/api/get-game-genres?gameid=${APP_ID}`;
 
   try {
     const response = await axios.get(url);

@@ -32,28 +32,7 @@ export const SearchBar = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
-
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
-  //   setMessage("Loading User Profile ...");
-  //   setLoading(true);
-
-  //   const steamID = await FetchUserSteamId(INPUTTED_ID);
-  //   console.log(steamID);
-
-  // const userInfo = await FetchUserInfo(STEAM_ID);
-
-  // if (!userInfo || userInfo.players.length <= 0) {
-  //   setMessage("Invalid or missing Steam ID.");
-  //   setLoading(false);
-  //   return;
-  // }
-
-  // setLoading(false);
-  // setMessage("");
-  // const fetchedID = userInfo.players[0].steamid;
-  // navigate(`/user/${fetchedID}`);
-  // };
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -63,7 +42,7 @@ export const SearchBar = () => {
     const { type, identifier } = parseSteamInput(INPUTTED_ID);
 
     try {
-      const res = await axios.get(`http://localhost:5000/api/get-user-id`, {
+      const res = await axios.get(`${BACKEND_URL}/api/get-user-id`, {
         params: { steamuser: identifier },
       });
 

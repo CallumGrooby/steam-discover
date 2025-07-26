@@ -17,13 +17,14 @@ export const Recomendation = (props) => {
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
   // 1. Fetch global games
   useEffect(() => {
     const fetchGlobalGames = async () => {
       try {
         const res = await fetch(
-          "http://localhost:5000/api/top100in2weeks-with-genres"
+          `${BACKEND_URL}/api/top100in2weeks-with-genres`
         );
         if (!res.ok) throw new Error("Failed to fetch global games");
         const data = await res.json();
