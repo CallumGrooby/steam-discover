@@ -10,8 +10,6 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 
-console.log(API_KEY);
-
 app.get("/api/owned-games", async (req, res) => {
   const { steamid } = req.query;
 
